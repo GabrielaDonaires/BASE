@@ -1,1 +1,6 @@
-// mi ejemplo de map
+from pyspark import SparkContext
+sc = SparkContext("local", "Ejemplo de map")
+numeros_rdd = sc.parallelize([1, 2, 3, 4, 5])
+resultado_rdd = numeros_rdd.map(lambda x: x * 2)
+print(resultado_rdd.collect())
+sc.stop()
