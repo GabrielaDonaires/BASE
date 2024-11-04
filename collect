@@ -1,0 +1,12 @@
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Ejemplo de collect")
+
+datos = [1, 2, 3, 4, 5]
+rdd = sc.parallelize(datos)
+
+resultado = rdd.collect()
+
+print("Los elementos del RDD son:", resultado)
+
+sc.stop()
