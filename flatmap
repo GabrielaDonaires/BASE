@@ -1,0 +1,7 @@
+from pyspark import SparkContext
+sc = SparkContext("local", "EjemploFlatMapRDD")
+data = ["Hola mundo", "PySpark es genial", "Aprendiendo flatMap"]
+rdd = sc.parallelize(data)
+rdd_flatMap = rdd.flatMap(lambda x: x.split(" "))
+for elemento in rdd_flatMap.collect():
+    print(elemento)
