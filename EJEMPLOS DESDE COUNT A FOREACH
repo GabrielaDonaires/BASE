@@ -1,0 +1,179 @@
+EJEMPLO DE COUNT: 
+from pyspark import SparkContext
+
+# Inicializar SparkContext
+sc = SparkContext("local", "Count Example")
+
+# Asegúrate de poner la ruta correcta del archivo
+log_data = sc.textFile("file:///home/user/data/test.txt")
+
+# Contar el número total de registros
+total_records = log_data.count()
+
+print(f"Total number of records: {total_records}")
+
+# Detener SparkContext
+sc.stop()
+
+-----------------------------------------------------------------
+
+EJEMPLO DE FIRST: 
+
+Primero, crearemos un archivo de texto de ejemplo.
+echo -e "Primera línea\nSegunda línea\nTercera línea" > test.txt
+
+Código en PySpark.
+from pyspark import SparkContext
+
+# Inicializar SparkContext
+sc = SparkContext("local", "First Example")
+
+# Cargar el archivo en un RDD
+log_data = sc.textFile("file:///path/to/your/test.txt")
+
+# Obtener el primer elemento (primera línea)
+first_record = log_data.first()
+
+print(f"First record: {first_record}")
+
+# Detener SparkContext
+sc.stop()
+
+-----------------------------------------------------------------
+
+EJEMPLO DE TAKE:
+
+1. Crear un archivo de prueba
+Si aún no tienes un archivo, crea uno para probar:
+
+echo -e "Primera línea\nSegunda línea\nTercera línea\nCuarta línea\nQuinta línea" > test.txt
+
+2. Código en PySpark
+
+from pyspark import SparkContext
+
+# Inicializar SparkContext
+sc = SparkContext("local", "Take Example")
+
+# Cargar el archivo en un RDD
+log_data = sc.textFile("file:///path/to/your/test.txt")
+
+# Tomar los primeros 3 elementos
+first_three_records = log_data.take(3)
+
+print("First three records:")
+for record in first_three_records:
+    print(record)
+
+# Detener SparkContext
+sc.stop()
+
+--------------------------------------------------------------------------------
+
+EJEMPLO DE saveAsTextFile :
+
+from pyspark import SparkContext
+
+# Inicializar SparkContext
+sc = SparkContext("local", "SaveAsTextFile Example")
+
+# Crear un RDD a partir de una lista
+data = ["Primera línea", "Segunda línea", "Tercera línea"]
+rdd = sc.parallelize(data)
+
+# Guardar el contenido del RDD en un archivo de texto
+output_path = "file:///path/to/output/directory"
+rdd.saveAsTextFile(output_path)
+
+print(f"Data saved to {output_path}")
+
+# Detener SparkContext
+sc.stop()
+
+------------------------------------------------------------------------------
+
+EJEMPLO DE MAX,MIN :
+
+from pyspark import SparkContext
+
+# Inicializar SparkContext
+sc = SparkContext("local", "Max and Min Example")
+
+# Crear un RDD a partir de una lista de números
+numbers = [10, 20, 5, 40, 25]
+rdd = sc.parallelize(numbers)
+
+# Encontrar el valor máximo
+max_value = rdd.max()
+
+# Encontrar el valor mínimo
+min_value = rdd.min()
+
+print(f"Maximum value: {max_value}")
+print(f"Minimum value: {min_value}")
+
+# Detener SparkContext
+sc.stop()
+
+Código en PySpark con strings:
+
+# Crear un RDD a partir de una lista de cadenas
+words = ["apple", "banana", "cherry", "date", "fig"]
+rdd_words = sc.parallelize(words)
+
+# Encontrar el valor máximo
+max_word = rdd_words.max()
+
+# Encontrar el valor mínimo
+min_word = rdd_words.min()
+
+print(f"Maximum word: {max_word}")
+print(f"Minimum word: {min_word}")
+
+-----------------------------------------------------------------------------
+
+EJEMPLO DE CountByKey : 
+
+from pyspark import SparkContext
+
+# Inicializar SparkContext
+sc = SparkContext("local", "CountByKey Example")
+
+# Crear un RDD de pares clave-valor
+data = [("cat", 1), ("dog", 1), ("cat", 1), ("mouse", 1), ("dog", 1), ("dog", 1)]
+rdd = sc.parallelize(data)
+
+# Contar el número de ocurrencias de cada clave
+key_counts = rdd.countByKey()
+
+print("Counts by key:")
+for key, count in key_counts.items():
+    print(f"{key}: {count}")
+
+# Detener SparkContext
+sc.stop()
+
+-------------------------------------------------------------------------------
+
+EJEMPLO DE FOREACH: 
+
+from pyspark import SparkContext
+
+# Inicializar SparkContext
+sc = SparkContext("local", "Foreach Example")
+
+# Crear un RDD a partir de una lista de números
+numbers = [1, 2, 3, 4, 5]
+rdd = sc.parallelize(numbers)
+
+# Función para aplicar a cada elemento
+def print_element(x):
+    print(f"Element: {x}")
+
+# Usar foreach para aplicar la función a cada elemento del RDD
+rdd.foreach(print_element)
+
+# Detener SparkContext
+sc.stop()
+
+
