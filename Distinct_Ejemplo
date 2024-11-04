@@ -1,0 +1,10 @@
+from pyspark import SparkContext
+sc = SparkContext("local", "EjemploDistinct")
+
+data = [1, 2, 2, 3, 4, 4, 5]
+rdd = sc.parallelize(data)
+
+rdd_distinct = rdd.distinct()
+
+for elemento in rdd_distinct.collect():
+    print(elemento)
