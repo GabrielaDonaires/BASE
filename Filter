@@ -1,0 +1,7 @@
+from pyspark import SparkContext
+sc = SparkContext("local", "EjemploFilter")
+data = [("Juan", 20), ("Ana", 30), ("Luis", 40)]
+rdd = sc.parallelize(data)
+rdd_filtrado = rdd.filter(lambda x: x[1] > 25)
+for elemento in rdd_filtrado.collect():
+    print(elemento)
