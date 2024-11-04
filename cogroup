@@ -1,0 +1,13 @@
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Ejemplo de cogroup")
+
+rdd1 = sc.parallelize([("a", 1), ("b", 2), ("c", 3)])
+rdd2 = sc.parallelize([("a", 4), ("b", 5), ("c", 6), ("d", 7)])
+
+resultado = rdd1.cogroup(rdd2).collect()
+
+for (clave, (valores1, valores2)) in resultado:
+    print(f"Clave: {clave}, Valores1: {list(valores1)}, Valores2: {list(valores2)}")
+
+sc.stop()
