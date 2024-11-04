@@ -1,0 +1,13 @@
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Ejemplo de coalesce")
+
+datos = list(range(1, 101))
+rdd = sc.parallelize(datos, numSlices=10)  # Crear RDD con 10 particiones
+
+rdd_coalesce = rdd.coalesce(2)
+
+print("Número de particiones antes de coalesce:", rdd.getNumPartitions())
+print("Número de particiones después de coalesce:", rdd_coalesce.getNumPartitions())
+
+sc.stop()
