@@ -1,0 +1,13 @@
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Ejemplo de reduceByKey")
+
+datos = [("a", 1), ("b", 2), ("a", 3), ("b", 4)]
+rdd = sc.parallelize(datos)
+
+resultado = rdd.reduceByKey(lambda x, y: x + y).collect()
+
+for (clave, valor) in resultado:
+    print(f"Clave: {clave}, Valor: {valor}")
+
+sc.stop()
