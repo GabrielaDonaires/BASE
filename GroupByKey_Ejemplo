@@ -1,0 +1,10 @@
+from pyspark import SparkContext
+sc = SparkContext("local", "EjemploGroupByKey")
+
+data = [("A", 1), ("B", 2), ("A", 3), ("B", 4), ("C", 5)]
+rdd = sc.parallelize(data)
+
+rdd_grouped = rdd.groupByKey()
+
+for clave, valores in rdd_grouped.collect():
+    print(clave, list(valores))
