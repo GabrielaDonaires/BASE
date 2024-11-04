@@ -1,0 +1,12 @@
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Ejemplo de reduce")
+
+datos = [1, 2, 3, 4, 5]
+rdd = sc.parallelize(datos)
+
+resultado = rdd.reduce(lambda x, y: x + y)
+
+print("La suma de todos los elementos del RDD es:", resultado)
+
+sc.stop()
