@@ -1,0 +1,13 @@
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Ejemplo de join")
+
+rdd1 = sc.parallelize([("a", 1), ("b", 2), ("c", 3)])
+rdd2 = sc.parallelize([("a", 4), ("b", 5), ("d", 6)])
+
+resultado = rdd1.join(rdd2).collect()
+
+for (clave, (valor1, valor2)) in resultado:
+    print(f"Clave: {clave}, Valor1: {valor1}, Valor2: {valor2}")
+
+sc.stop()
